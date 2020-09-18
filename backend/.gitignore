@@ -2,7 +2,7 @@
 .vscode/
 node_modules/
 build/
-tmp/*
-!tmp/.gitkeep
-temp/
+tmp/
+temp/*
+!temp/.gitkeep
 .DS_Store
