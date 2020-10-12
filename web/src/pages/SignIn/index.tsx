@@ -1,56 +1,78 @@
-import React, { useRef, useCallback } from 'react';
+import React, { useCallback, useRef } from 'react';
 import { FiLogIn, FiMail, FiLock } from 'react-icons/fi';
-import { Form } from '@unform/web';
 import { FormHandles } from '@unform/core';
+import { Form } from '@unform/web';
 import * as Yup from 'yup';
-import logo from '../../assets/logo.svg';
 import getValidationErrors from '../../utils/getValidationErrors';
+
+// context
+import { useAuth } from '../../context/AuthContext';
+
+// components
 import Input from '../../components/Input';
 import Button from '../../components/Button';
+
+// styles
 import { Container, Content, Background } from './styles';
+import logoImg from '../../assets/logo.svg';
+
+interface SignInFormData {
+  email: string;
+  password: string;
+}
 
 const SignIn: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
 
-  const handleSubmit = useCallback(async (data: object) => {
-    try {
-      formRef.current?.setErrors({});
+  const { signIn } = useAuth();
 
-      const schema = Yup.object().shape({
-        email: Yup.string()
-          .required('E-mail obrigatório')
-          .email('Digite um email válido'),
-        password: Yup.string().required('senha obrigatória'),
-      });
+  const handleSubmit = useCallback(
+    async (data: SignInFormData) => {
+      try {
+        formRef.current?.setErrors({});
 
-      await schema.validate(data, {
-        abortEarly: false,
-      });
-    } catch (err) {
-      const errors = getValidationErrors(err);
+        const schema = Yup.object().shape({
+          email: Yup.string()
+            .email('Digite um e-mail válido.')
+            .required('Email obrigatório.'),
+          password: Yup.string().required('Senha obrigatória'),
+        });
 
-      formRef.current?.setErrors(errors);
-    }
-  }, []);
+        await schema.validate(data, {
+          abortEarly: false,
+        });
+        signIn({
+          email: data.email,
+          password: data.password,
+        });
+      } catch (err) {
+        const errors = getValidationErrors(err);
+        formRef.current?.setErrors(errors);
+      }
+    },
+    [signIn],
+  );
 
   return (
     <Container>
       <Content>
-        <img src={logo} alt="" />
+        <img src={logoImg} alt="GoBarber" />
+
         <Form ref={formRef} onSubmit={handleSubmit}>
           <h1>Faça seu logon</h1>
-
-          <Input name="email" icon={FiMail} placeholder="E-mail" />
+          <Input icon={FiMail} name="email" placeholder="E-mail" />
           <Input
-            name="password"
             icon={FiLock}
-            placeholder="Senha"
             type="password"
+            name="password"
+            placeholder="Senha"
           />
           <Button type="submit">Entrar</Button>
-          <a href="forgot">Esqueci minha senha</a>
+
+          <a href="#t">Esqueci minha senha</a>
         </Form>
-        <a href="login">
+
+        <a href="#t">
           <FiLogIn />
           Criar conta
         </a>

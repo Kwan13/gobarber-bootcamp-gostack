@@ -1,11 +1,10 @@
 import { ValidationError } from 'yup';
-import { error } from 'console';
 
 interface Errors {
   [key: string]: string;
 }
 
-export default function getValidationErros(err: ValidationError): Errors {
+function getValidationErrors(err: ValidationError): Errors {
   const validationErrors: Errors = {};
 
   err.inner.forEach(error => {
@@ -14,3 +13,5 @@ export default function getValidationErros(err: ValidationError): Errors {
 
   return validationErrors;
 }
+
+export default getValidationErrors;

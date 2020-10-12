@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-
 import { shade } from 'polished';
 
 export const Container = styled.button`
@@ -8,8 +7,9 @@ export const Container = styled.button`
   border-radius: 10px;
   border: 0;
   padding: 0 16px;
-  color: #312e38;
   width: 100%;
+  color: #312e38;
+  margin-top: 8px;
   font-weight: 500;
   margin-top: 16px;
   transition: background 0.2s;

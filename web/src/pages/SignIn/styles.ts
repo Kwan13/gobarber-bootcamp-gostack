@@ -1,10 +1,12 @@
 import styled from 'styled-components';
 import { shade } from 'polished';
 
-import SignInBackground from '../../assets/sign-in-background.png';
+// images
+import signInBackground from '../../assets/sign-in-background.png';
 
 export const Container = styled.div`
   height: 100vh;
+
   display: flex;
   align-items: stretch;
 `;
@@ -12,8 +14,9 @@ export const Container = styled.div`
 export const Content = styled.div`
   display: flex;
   flex-direction: column;
-  place-content: center;
   align-items: center;
+
+  place-content: center;
   width: 100%;
   max-width: 700px;
 
@@ -29,8 +32,8 @@ export const Content = styled.div`
     a {
       color: #f4ede8;
       display: block;
-      text-decoration: none;
       margin-top: 24px;
+      text-decoration: none;
       transition: color 0.2s;
 
       &:hover {
@@ -41,11 +44,9 @@ export const Content = styled.div`
 
   > a {
     color: #ff9000;
-    display: block;
-    text-decoration: none;
     margin-top: 24px;
+    text-decoration: none;
     transition: color 0.2s;
-
     display: flex;
     align-items: center;
 
@@ -61,6 +62,6 @@ export const Content = styled.div`
 
 export const Background = styled.div`
   flex: 1;
-  background: url(${SignInBackground}) no-repeat center;
+  background: url(${signInBackground}) no-repeat center;
   background-size: cover;
 `;
