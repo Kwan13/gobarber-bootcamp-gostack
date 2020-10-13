@@ -6,19 +6,18 @@ import Routes from './routes';
 import GlobalStyle from './styles/global';
 
 // context
-import { AuthProvider } from './hooks/AuthContext';
-
 import ToastContainer from './components/ToastContainer';
+import AppProvider from './hooks';
 
 const App: React.FC = () => {
   return (
     <>
-      <AuthProvider>
+      <AppProvider>
         <BrowserRouter>
           <Routes />
         </BrowserRouter>
-      </AuthProvider>
-      <ToastContainer />
+      </AppProvider>
+
       <GlobalStyle />
     </>
   );
