@@ -1,25 +1,21 @@
 import React from 'react';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 import Routes from './routes';
+
+// context
+import AppProvider from './hooks';
 
 // GlobalStyle
 import GlobalStyle from './styles/global';
 
-// context
-import ToastContainer from './components/ToastContainer';
-import AppProvider from './hooks';
-
 const App: React.FC = () => {
   return (
-    <>
+    <Router>
       <AppProvider>
-        <BrowserRouter>
-          <Routes />
-        </BrowserRouter>
+        <Routes />
       </AppProvider>
-
       <GlobalStyle />
-    </>
+    </Router>
   );
 };
 
